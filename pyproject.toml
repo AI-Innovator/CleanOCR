@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "cleanocr"
+version = "0.1.0"
+description = "Automatically denoise shabby document images for ocr"
+authors = ["prenes <prenes.contact@gmail.com>"]
+keywords = ["denoise", "ocr"]
+readme = "README.md"
+license = "MIT"
+homepage = "www.prenes.org"
+repository = "https://github.com/AI-Innovator/CleanOCR"
+include = [
+    "LICENSE",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+poetry = "^1.0.0"
+torch = "1.11.0"
+opencv-python = "4.5.3.56"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+vspoetry = 'cleanocr:main'
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
