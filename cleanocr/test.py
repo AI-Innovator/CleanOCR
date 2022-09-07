@@ -1,6 +1,9 @@
+import os
 import cv2
+import requests
 import torch
 import numpy as np
+from tqdm import tqdm
 from PIL import Image
 from torchvision import transforms
 from .models import Generator, SRCNN
@@ -63,16 +66,46 @@ def convert_ycbcr_to_rgb(img):
         raise Exception('Unknown Type', type(img))
 
 
-def load_g_model(name, device):
+def download_checkpoint(remote_url, local_path):
+    response = requests.get(remote_url, stream=True)
+    total_size_in_bytes = int(response.headers.get("content-length", 0))
+    block_size = 1024  # 1 Kibibyte
+
+    progress_bar = tqdm(
+        desc=f"Downloading {local_path}..",
+        total=total_size_in_bytes,
+        unit="iB",
+        unit_scale=True,
+    )
+
+    with open(local_path, "wb") as ref:
+        for data in response.iter_content(block_size):
+            progress_bar.update(len(data))
+            ref.write(data)
+
+    progress_bar.close()
+    if total_size_in_bytes not in (0, progress_bar.n):
+        print("ERROR, something went wrong")
+
+
+def load_g_model(device):
+    resume_path = os.path.join(os.path.dirname(__file__), 'cleanocr/checkpoints/G.pth')
+    if not os.path.exists(resume_path):
+        download_checkpoint(remote_url=feature_pytorch_url, local_path=resume_path)
+
     G = Generator()
-    G.load_state_dict(torch.load(f"./cleanocr/checkpoints/G{name}.pth", map_location={"cuda:0": "cpu"}))
+    G.load_state_dict(torch.load(resume_path, map_location={"cuda:0": "cpu"}))
     G.eval()
     return G.to(device)
 
 
-def load_s_model(name, device):
+def load_s_model(device):
+    resume_path = os.path.join(os.path.dirname(__file__), 'cleanocr/checkpoints/S.pth')
+    if not os.path.exists(resume_path):
+        download_checkpoint(remote_url=feature_pytorch_url, local_path=resume_path)
+
     S = SRCNN()
-    S.load_state_dict(torch.load(f"./cleanocr/checkpoints/S{name}.pth", map_location={"cuda:0": "cpu"}))
+    S.load_state_dict(torch.load(resume_path, map_location={"cuda:0": "cpu"}))
     S.eval()
     return S.to(device)
 
@@ -80,8 +113,8 @@ def load_s_model(name, device):
 def denoise_ocr(image):
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     transformer = Transform()
-    G = load_g_model('191', device)
-    S = load_s_model('49', device)
+    G = load_g_model(device)
+    S = load_s_model(device)
 
     with torch.no_grad():
         img = transformer(Image.fromarray(image))
