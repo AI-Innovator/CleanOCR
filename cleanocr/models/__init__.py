@@ -1,1 +1,1 @@
-from .net import Generator
+from .net import Generator, SRCNN
