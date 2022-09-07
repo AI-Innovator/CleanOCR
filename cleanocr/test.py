@@ -90,7 +90,7 @@ def download_checkpoint(remote_url, local_path):
 
 def load_g_model(device):
     url = "https://github.com/AI-Innovator/CleanOCR/releases/download/v1.0.0/G.pth"
-    resume_path = os.path.join(os.path.dirname(__file__), 'cleanocr/checkpoints/G.pth')
+    resume_path = os.path.join(os.path.dirname(__file__), 'checkpoints/G.pth')
     if not os.path.exists(resume_path):
         download_checkpoint(remote_url=url, local_path=resume_path)
 
@@ -102,7 +102,7 @@ def load_g_model(device):
 
 def load_s_model(device):
     url = "https://github.com/AI-Innovator/CleanOCR/releases/download/v1.0.0/S.pth"
-    resume_path = os.path.join(os.path.dirname(__file__), 'cleanocr/checkpoints/S.pth')
+    resume_path = os.path.join(os.path.dirname(__file__), 'checkpoints/S.pth')
     if not os.path.exists(resume_path):
         download_checkpoint(remote_url=url, local_path=resume_path)
 
@@ -118,6 +118,7 @@ def denoise_ocr(image):
     G = load_g_model(device)
     S = load_s_model(device)
 
+    h, w, c = image.shape
     with torch.no_grad():
         img = transformer(Image.fromarray(image))
         img = img.unsqueeze(0).to(device)
@@ -139,4 +140,5 @@ def denoise_ocr(image):
         output = np.array([preds, ycbcr[..., 1], ycbcr[..., 2]]).transpose([1, 2, 0])
         output = np.clip(convert_ycbcr_to_rgb(output), 0.0, 255.0).astype(np.uint8)
 
+    output = cv2.resize(output, (h, w))
     return output
