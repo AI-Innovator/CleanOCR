@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "cleanocr"
 version = "0.1.0"
-description = "Automatically denoise shabby document images for ocr"
+description = "Automatically denoise degraded document images to improve ocr engine"
 authors = ["prenes <prenes.contact@gmail.com>"]
 keywords = ["denoise", "ocr"]
 readme = "README.md"
 license = "MIT"
-homepage = "www.prenes.org"
+homepage = "https://www.prenes.org/"
 repository = "https://github.com/AI-Innovator/CleanOCR"
 include = [
     "LICENSE",
