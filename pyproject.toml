@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cleanocr"
-version = "0.1.1"
+version = "0.1.2"
 description = "Automatically denoise degraded document images to improve ocr engine"
 authors = ["prenes <prenes.contact@gmail.com>"]
 keywords = ["denoise", "ocr"]
@@ -18,6 +18,7 @@ poetry = "^1.0.0"
 torch = "1.11.0"
 opencv-python = "4.5.3.56"
 torchvision = "0.12.0"
+tqdm = "^4.64.1"
 
 [tool.poetry.dev-dependencies]
 
