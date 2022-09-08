@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cleanocr"
-version = "0.1.2"
+version = "0.1.3"
 description = "Automatically denoise degraded document images to improve ocr engine"
 authors = ["prenes <prenes.contact@gmail.com>"]
 keywords = ["denoise", "ocr"]
