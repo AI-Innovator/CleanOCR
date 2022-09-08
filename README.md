@@ -1,5 +1,4 @@
 # CleanOCR
-Denoise degraded images to improve accuracy in ocr
 
 ## Installation
 ```
