@@ -1,4 +1,4 @@
-# CleanOCR
+<img alt="face-recognition-plugin" src="https://user-images.githubusercontent.com/82228271/189012182-7cd4d760-90d1-4f78-8003-1e01538c3321.png">
 
 ## Installation
 ```
