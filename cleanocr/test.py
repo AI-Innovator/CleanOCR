@@ -89,10 +89,10 @@ def download_checkpoint(remote_url, local_path):
 
 
 def load_g_model(device):
-    url = "https://github.com/AI-Innovator/CleanOCR/releases/download/untagged-98170c11b62273340533/G.pth"
+    url = "https://github.com/AI-Innovator/CleanOCR/releases/download/v0.1.3/G.pth"
     resume_path = os.path.join(os.path.dirname(__file__), 'checkpoints/G.pth')
     if not os.path.exists(resume_path):
-        os.makedirs(os.path.dirname(resume_path))
+        os.makedirs(os.path.dirname(resume_path), exist_ok=True)
         download_checkpoint(remote_url=url, local_path=resume_path)
 
     G = Generator()
@@ -102,10 +102,10 @@ def load_g_model(device):
 
 
 def load_s_model(device):
-    url = "https://github.com/AI-Innovator/CleanOCR/releases/download/untagged-98170c11b62273340533/S.pth"
+    url = "https://github.com/AI-Innovator/CleanOCR/releases/download/v0.1.3/S.pth"
     resume_path = os.path.join(os.path.dirname(__file__), 'checkpoints/S.pth')
     if not os.path.exists(resume_path):
-        os.makedirs(os.path.dirname(resume_path))
+        os.makedirs(os.path.dirname(resume_path), exist_ok=True)
         download_checkpoint(remote_url=url, local_path=resume_path)
 
     S = SRCNN()
