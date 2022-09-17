@@ -1,4 +1,4 @@
-<img alt="face-recognition-plugin" src="https://user-images.githubusercontent.com/82228271/189012182-7cd4d760-90d1-4f78-8003-1e01538c3321.png">
+<img alt="face-recognition-plugin" src="https://user-images.githubusercontent.com/82228271/190843751-a73de915-f3dc-485f-a63b-8a89a48b6882.png">
 
 ## Installation
 ```
