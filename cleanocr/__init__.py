@@ -1,1 +1,2 @@
-from .test import denoise_ocr
+from .denoise import denoise_ocr
+from .preprocess import *

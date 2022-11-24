@@ -3,7 +3,7 @@ import sys
 sys.path.append('.')
 import glob
 import cv2
-from cleanocr import denoise_ocr
+from cleanocr import denoise_ocr, thinning
 
 
 def test():
@@ -22,5 +22,13 @@ def test_dir():
         cv2.imwrite(dst_path, result)
 
 
+def test_thinning():
+    image = cv2.imread('unit_test/result.png')
+    result = thinning(image)
+    cv2.imwrite('unit_test/thin.png', result)
+
+
 if __name__ == '__main__':
     test()
+    test_thinning()
+
