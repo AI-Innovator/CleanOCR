@@ -13,8 +13,9 @@ def thinning(img):
 
 
 def binarization(img):
-    imgf = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-    return imgf
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    bin_img = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    return bin_img
 
 """
 

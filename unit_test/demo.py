@@ -3,7 +3,7 @@ import sys
 sys.path.append('.')
 import glob
 import cv2
-from cleanocr import denoise_ocr, thinning
+from cleanocr import denoise_ocr, thinning, binarization
 
 
 def test():
@@ -28,7 +28,14 @@ def test_thinning():
     cv2.imwrite('unit_test/thin.png', result)
 
 
+def test_binarization():
+    image = cv2.imread('unit_test/result.png')
+    result = binarization(image)
+    cv2.imwrite('unit_test/binary.png', result)
+
+
 if __name__ == '__main__':
     test()
     test_thinning()
+    test_binarization()
 
