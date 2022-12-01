@@ -13,20 +13,18 @@ def thinning(img):
 
 
 def binarization(img):
+    """ Binarization """
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     bin_img = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
     return bin_img
 
+
+def remove_noise(img):
+    """ Noise Removal """
+    dst = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 15)
+    return dst
+
 """
-
-# Noise Removal
-# Reading image from folder where it is stored
-img = cv2.imread('bear.png')
-# denoising of image saving it into dst image
-dst = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 15)
-# Plotting of source and destination image
-
-
 # Skew Correction
 input_file = sys.argv[1]
 img = im.open(input_file)
