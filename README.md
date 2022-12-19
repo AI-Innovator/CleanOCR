@@ -17,6 +17,8 @@ pip install cleanocr
 <details open>
 <summary><h2>Documentation</h2></summary>
 
+<h3>Denoise OCR</h3>
+
 ```
 import cv2
 from cleanocr import denoise_ocr
@@ -24,6 +26,28 @@ from cleanocr import denoise_ocr
 image = cv2.imread('test.png')
 result = denoise_ocr(image)
 cv2.imwrite('result.png', result)
+```
+
+<h3>Thinning</h3>
+
+```
+import cv2
+from cleanocr import thinning
+
+image = cv2.imread('unit_test/result.png')
+result = thinning(image)
+cv2.imwrite('unit_test/thin.png', result)
+```
+
+<h3>Binarization</h3>
+
+```
+import cv2
+from cleanocr import binarization
+
+image = cv2.imread('unit_test/result.png')
+result = binarization(image)
+cv2.imwrite('unit_test/unit_test/binary.png.png', result)
 ```
 
 </details>
