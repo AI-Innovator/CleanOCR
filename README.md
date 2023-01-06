@@ -3,6 +3,10 @@
 <details open>
 <summary><h2>How it works</h2></summary>
 
+
+https://user-images.githubusercontent.com/82228271/210924923-b115c6c2-c748-4fba-abd1-1843503a98bf.mp4
+
+
 </details>
 <details open>
 <summary><h2>Installation</h2></summary>
