@@ -114,7 +114,7 @@ def load_s_model(device):
     return S.to(device)
 
 
-def denoise_ocr(image):
+def denoise_ocr_on_patch(image):
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     transformer = Transform()
     G = load_g_model(device)
@@ -144,3 +144,33 @@ def denoise_ocr(image):
 
     output = cv2.resize(output, (h, w))
     return output
+
+
+def denoise_ocr(image):
+    img_h, img_w, img_c = image.shape
+
+    dst_img = np.zeros(image.shape)
+    nh_size = 400
+    nw_size = 400
+
+    for i in range(0, img_h, nh_size):
+        for j in range(0, img_w, nw_size):
+            x1 = j
+            x2 = j + nw_size
+            y1 = i
+            y2 = i + nh_size
+
+            if x2 >= img_w:
+                x1 = img_w - nw_size
+                x2 = img_w
+
+            if y2 >= img_h:
+                y1 = img_h - nh_size
+                y2 = img_h
+
+            crop_img = image[y1:y2, x1:x2]
+            result = denoise_ocr_on_patch(crop_img)
+
+            dst_img[y1:y2, x1:x2] = result
+
+    return dst_img

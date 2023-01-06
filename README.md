@@ -3,8 +3,6 @@
 <details open>
 <summary><h2>How it works</h2></summary>
 
-![example](example/cleanocr.png)
-
 </details>
 <details open>
 <summary><h2>Installation</h2></summary>

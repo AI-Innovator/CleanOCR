@@ -1,2 +1,2 @@
-from .denoise import denoise_ocr
+from .denoise import *
 from .preprocess import *
